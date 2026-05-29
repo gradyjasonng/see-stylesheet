@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    branches: [main, next]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # Needed for semantic-release to create GitHub releases and push back
+    # the version bump + CHANGELOG commits.
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history is required for semantic-release to determine the
+          # next version from the commit log.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - run: npm test
+
+      - name: Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # Attach npm provenance so installs can verify the package was
+          # published from this repository's CI.
+          NPM_CONFIG_PROVENANCE: true
