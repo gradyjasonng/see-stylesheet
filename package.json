@@ -34,6 +34,10 @@
     "utility"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gradyjasonng/see-stylesheet.git"
+  },
   "devDependencies": {
     "@types/node": "^25.9.1",
     "@vitest/browser": "^4.1.7",
