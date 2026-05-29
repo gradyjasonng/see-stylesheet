@@ -1,0 +1,45 @@
+{
+  "name": "@gradyjasonng/see-stylesheet",
+  "version": "0.1.0",
+  "description": "A superset of the CSSStyleSheet interface with utility methods for programmatic stylesheet manipulation.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "build:watch": "tsc -w --preserveWatchOutput",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && vitest run",
+    "test:watch": "npm run build && concurrently -k -n TSC,VITEST \"npm run build:watch\" \"vitest\"",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "css",
+    "stylesheet",
+    "cssom",
+    "web",
+    "dom",
+    "typescript",
+    "utility"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@vitest/browser": "^4.1.7",
+    "@vitest/browser-playwright": "^4.1.7",
+    "concurrently": "^9.2.1",
+    "typescript": "^5.4.0",
+    "vitest": "^4.1.7"
+  } 
+}

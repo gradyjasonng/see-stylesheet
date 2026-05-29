@@ -1,0 +1,7 @@
+{
+  "jest.jestCommandLine": "npm run test:unit:once --",
+  "jest.rootPath": ".",
+  "jest.runMode": {
+    "type": "on-demand"
+  }
+}
